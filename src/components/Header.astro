@@ -1,0 +1,87 @@
+---
+const navLinks = [
+  { label: 'Quiénes somos', href: '#quienes-somos' },
+  { label: 'Qué hacemos',   href: '#que-hacemos' },
+  { label: 'Productos',     href: '#productos' },
+  { label: 'Demo',          href: '#demo' },
+  { label: 'Planes',        href: '#planes' },
+  { label: 'Promociones',   href: '#promociones' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-brand-dark/90 backdrop-blur-sm border-b border-brand-border">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center">
+        <img
+          src="/images/logo.png"
+          alt="Lugic Systems"
+          class="h-8 w-auto"
+        />
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="hidden md:flex items-center gap-6">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class="text-sm text-brand-muted hover:text-brand-text transition-colors duration-200"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- CTA -->
+      <a
+        href="#contacto"
+        class="hidden md:inline-flex items-center px-4 py-2 rounded-md bg-brand-blue text-white text-sm font-medium hover:bg-blue-500 transition-colors duration-200"
+      >
+        Contactanos
+      </a>
+
+      <!-- Hamburger mobile -->
+      <button
+        id="menu-toggle"
+        class="md:hidden text-brand-muted hover:text-brand-text"
+        aria-label="Abrir menú"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Nav mobile -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-brand-border">
+    <div class="px-4 py-3 flex flex-col gap-3">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class="text-sm text-brand-muted hover:text-brand-text transition-colors duration-200"
+        >
+          {link.label}
+        </a>
+      ))}
+      
+        href="#contacto"
+        class="mt-2 inline-flex justify-center items-center px-4 py-2 rounded-md bg-brand-blue text-white text-sm font-medium"
+      >
+        Contactanos
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+</script>

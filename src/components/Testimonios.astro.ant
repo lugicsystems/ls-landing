@@ -1,0 +1,121 @@
+---
+// Testimonios.astro
+// bg-brand-dark para alternar con Promociones (bg-brand-mid)
+
+const testimonios = [
+  {
+    nombre: "Luis Rodríguez",
+    negocio: "Despensa DIBU",
+    ubicacion: "Aguilares, Tucumán",
+    rubro: "Despensa",
+    texto: "Todo llegó perfecto. Ya está todo cargado en la PC, todo listo.",
+    detalle: "Software + Hardware completo · Envío a Tucumán",
+    icono: "🛒",
+    remoto: true,
+  },
+  {
+    nombre: "Héctor Leschinsky",
+    negocio: "La Esquina del Descartable",
+    ubicacion: "Catamarca Capital, Catamarca",
+    rubro: "Descartables por Mayor y Menor",
+    texto: "Gracias a ustedes. Recién termino de armar la máquina y ya está funcionando.",
+    detalle: "Software completo · Instalación 100% remota",
+    icono: "📦",
+    remoto: true,
+  },
+  {
+    nombre: "Luciana Quiroga",
+    negocio: "El Shop",
+    ubicacion: "Oliva, Córdoba",
+    rubro: "Mini Super / Drugstore",
+    texto: "Estamos cargando productos... ¡es una locura la cantidad de cosas que hay! Lucas, te mando otro cliente.",
+    detalle: "Software + Balanzas digitales · Soporte remoto",
+    icono: "🏪",
+    remoto: true,
+  },
+  {
+    nombre: "Martín Zárate",
+    negocio: "La Chilena",
+    ubicacion: "Córdoba Capital",
+    rubro: "Supermercado y Distribuidora",
+    texto: "Está bueno para tenerlo en cuenta. Dale Lucas.",
+    detalle: "Sistema completo · 2 sucursales · Red de datos · Paneles solares",
+    icono: "🏬",
+    remoto: false,
+  },
+];
+---
+
+<section id="testimonios" class="bg-brand-dark py-20 px-4">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <span class="text-brand-blue text-sm font-semibold uppercase tracking-widest">Testimonios</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-brand-text mt-2">
+        Lo que dicen nuestros clientes
+      </h2>
+      <p class="text-brand-muted mt-4 max-w-xl mx-auto">
+        Comercios de todo el país confían en Lugic Systems. Estas son sus palabras, directo del WhatsApp.
+      </p>
+    </div>
+
+    <!-- Grid de cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {testimonios.map((t) => (
+        <div class="bg-brand-mid border border-brand-border rounded-2xl p-6 flex flex-col gap-4 hover:border-brand-blue transition-colors duration-300">
+
+          <!-- Cita -->
+          <div class="relative">
+            <span class="text-brand-blue text-4xl leading-none font-serif absolute -top-2 -left-1 select-none">"</span>
+            <p class="text-brand-text text-base leading-relaxed pl-6 italic">
+              {t.texto}
+            </p>
+          </div>
+
+          <!-- Divider -->
+          <div class="border-t border-brand-border"></div>
+
+          <!-- Info del cliente -->
+          <div class="flex items-start gap-3">
+            <div class="text-3xl leading-none mt-0.5">{t.icono}</div>
+            <div class="flex-1 min-w-0">
+              <p class="text-brand-text font-semibold">{t.nombre}</p>
+              <p class="text-brand-blue text-sm font-medium">{t.negocio}</p>
+              <p class="text-brand-muted text-sm">{t.rubro} · {t.ubicacion}</p>
+            </div>
+            <!-- Badge remoto/presencial -->
+            <div class="shrink-0">
+              {t.remoto ? (
+                <span class="text-xs px-2 py-1 rounded-full bg-brand-blue/10 text-brand-blue border border-brand-blue/20 whitespace-nowrap">
+                  🌐 Remoto
+                </span>
+              ) : (
+                <span class="text-xs px-2 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 whitespace-nowrap">
+                  📍 Presencial
+                </span>
+              )}
+            </div>
+          </div>
+
+          <!-- Detalle de lo que compró -->
+          <p class="text-brand-muted text-xs border-t border-brand-border pt-3">
+            {t.detalle}
+          </p>
+
+        </div>
+      ))}
+    </div>
+
+    <!-- Cobertura nacional — dato social proof -->
+    <div class="mt-12 text-center">
+      <p class="text-brand-muted text-sm">
+        Clientes activos en
+        <span class="text-brand-text font-medium"> Tucumán · Catamarca · Córdoba </span>
+        y todo el país.
+        <a href="#contacto" class="text-brand-blue hover:underline ml-1">Sumá tu negocio →</a>
+      </p>
+    </div>
+
+  </div>
+</section>

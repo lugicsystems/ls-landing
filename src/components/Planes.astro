@@ -1,11 +1,12 @@
 ---
-// Sección: Planes y precios
+const WA = "5493512548711";
 
 const planesComercio = [
   {
     nombre: 'SFC Punto',
     precio: 229,
     mensual: 19,
+    entregaMensual: 99,
     descripcion: 'Punto de venta completo para comercios.',
     destacado: false,
     features: [
@@ -21,6 +22,7 @@ const planesComercio = [
     nombre: 'SFC Gestión',
     precio: 299,
     mensual: 25,
+    entregaMensual: 99,
     descripcion: 'Gestión integral + punto de venta.',
     destacado: false,
     features: [
@@ -35,6 +37,7 @@ const planesComercio = [
     nombre: 'SFC Gestión Plus',
     precio: 329,
     mensual: 35,
+    entregaMensual: 99,
     descripcion: 'El más completo para gestión y facturación.',
     destacado: true,
     features: [
@@ -47,7 +50,8 @@ const planesComercio = [
   {
     nombre: 'SFC Gestión Premium',
     precio: 439,
-    mensual: null,
+    mensual: 35,
+    entregaMensual: 199,
     descripcion: 'Software completo + equipamiento incluido.',
     destacado: false,
     features: [
@@ -63,6 +67,8 @@ const planesGastronomia = [
   {
     nombre: 'SFC Gastro Simple',
     precio: 349,
+    mensual: 39,
+    entregaMensual: 99,
     descripcion: 'Punto de venta gastronómico completo.',
     destacado: false,
     features: [
@@ -80,6 +86,8 @@ const planesGastronomia = [
   {
     nombre: 'SFC Gastro Plus',
     precio: 429,
+    mensual: 39,
+    entregaMensual: 199,
     descripcion: 'Todo lo anterior + comandera térmica incluida.',
     destacado: true,
     features: [
@@ -94,11 +102,8 @@ const planesGastronomia = [
 <section id="planes" class="py-24 bg-brand-dark">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <!-- Encabezado -->
     <div class="text-center mb-6">
-      <span class="text-brand-blue text-sm font-semibold uppercase tracking-widest">
-        Planes y precios
-      </span>
+      <span class="text-brand-blue text-sm font-semibold uppercase tracking-widest">Planes y precios</span>
       <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-brand-text">
         Elegí el plan que se adapta
         <span class="text-brand-blue"> a tu negocio</span>
@@ -109,62 +114,40 @@ const planesGastronomia = [
       </p>
     </div>
 
-    <!-- Toggle modalidad -->
     <div class="flex justify-center mb-12">
       <div class="flex bg-brand-mid border border-brand-border rounded-lg p-1 gap-1">
-        <button
-          id="btn-unica"
-          class="modalidad-btn px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200 bg-brand-blue text-white"
-        >
+        <button id="btn-unica" class="modalidad-btn px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200 bg-brand-blue text-white">
           Pago único
         </button>
-        <button
-          id="btn-mensual"
-          class="modalidad-btn px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200 text-brand-muted hover:text-brand-text"
-        >
+        <button id="btn-mensual" class="modalidad-btn px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200 text-brand-muted hover:text-brand-text">
           Mensual
         </button>
       </div>
     </div>
 
     <!-- Comercios generales -->
-    <h3 class="text-brand-text font-semibold text-xl mb-6 text-center">
-      Comercios generales
-    </h3>
+    <h3 class="text-brand-text font-semibold text-xl mb-6 text-center">Comercios generales</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
       {planesComercio.map(plan => (
         <div class={`relative rounded-xl border p-6 flex flex-col ${plan.destacado ? 'border-brand-blue bg-brand-mid' : 'border-brand-border bg-brand-mid'}`}>
-
           {plan.destacado && (
             <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-              <span class="bg-brand-blue text-white text-xs font-semibold px-3 py-1 rounded-full">
-                Más elegido
-              </span>
+              <span class="bg-brand-blue text-white text-xs font-semibold px-3 py-1 rounded-full">Más elegido</span>
             </div>
           )}
-
           <div class="mb-4">
             <h4 class="text-brand-text font-bold text-lg">{plan.nombre}</h4>
             <p class="text-brand-muted text-sm mt-1">{plan.descripcion}</p>
           </div>
-
-          <div class={`precio-unico mb-6`}>
+          <div class="precio-unico mb-6">
             <span class="text-3xl font-bold text-brand-text">USD {plan.precio}</span>
             <span class="text-brand-muted text-sm ml-1">pago único</span>
           </div>
-
-          <div class={`precio-mensual hidden mb-6`}>
-            {plan.mensual ? (
-              <div>
-                <span class="text-brand-muted text-sm block">USD 99 entrega inicial +</span>
-                <span class="text-3xl font-bold text-brand-text">USD {plan.mensual}</span>
-                <span class="text-brand-muted text-sm ml-1">/mes</span>
-              </div>
-            ) : (
-              <span class="text-brand-muted text-sm italic">Solo disponible en pago único</span>
-            )}
+          <div class="precio-mensual hidden mb-6">
+            <span class="text-brand-muted text-sm block">USD {plan.entregaMensual} entrega inicial +</span>
+            <span class="text-3xl font-bold text-brand-text">USD {plan.mensual}</span>
+            <span class="text-brand-muted text-sm ml-1">/mes</span>
           </div>
-
           <ul class="space-y-2 flex-1 mb-6">
             {plan.features.map(f => (
               <li class="flex items-start gap-2 text-brand-muted text-sm">
@@ -175,10 +158,13 @@ const planesGastronomia = [
               </li>
             ))}
           </ul>
-
           <a
-            href="#contacto"
-            class={`w-full py-2.5 rounded-md text-sm font-semibold text-center transition-colors duration-200 ${plan.destacado ? 'bg-brand-blue text-white hover:bg-blue-500' : 'border border-brand-border text-brand-text hover:border-brand-blue'}`}
+            href="#"
+            data-plan={plan.nombre}
+            data-precio-unico={plan.precio}
+            data-precio-mensual={plan.mensual}
+            data-entrega={plan.entregaMensual}
+            class={`wa-plan-btn w-full py-2.5 rounded-md text-sm font-semibold text-center transition-colors duration-200 ${plan.destacado ? 'bg-brand-blue text-white hover:bg-blue-500' : 'border border-brand-border text-brand-text hover:border-brand-blue'}`}
           >
             Consultar
           </a>
@@ -196,25 +182,24 @@ const planesGastronomia = [
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto mb-12">
       {planesGastronomia.map(plan => (
         <div class={`relative rounded-xl border p-6 flex flex-col ${plan.destacado ? 'border-brand-blue bg-brand-mid' : 'border-brand-border bg-brand-mid'}`}>
-
           {plan.destacado && (
             <div class="absolute -top-3 left-1/2 -translate-x-1/2">
-              <span class="bg-brand-blue text-white text-xs font-semibold px-3 py-1 rounded-full">
-                Más elegido
-              </span>
+              <span class="bg-brand-blue text-white text-xs font-semibold px-3 py-1 rounded-full">Más elegido</span>
             </div>
           )}
-
           <div class="mb-4">
             <h4 class="text-brand-text font-bold text-lg">{plan.nombre}</h4>
             <p class="text-brand-muted text-sm mt-1">{plan.descripcion}</p>
           </div>
-
-          <div class="mb-6">
+          <div class="precio-unico mb-6">
             <span class="text-3xl font-bold text-brand-text">USD {plan.precio}</span>
             <span class="text-brand-muted text-sm ml-1">pago único</span>
           </div>
-
+          <div class="precio-mensual hidden mb-6">
+            <span class="text-brand-muted text-sm block">USD {plan.entregaMensual} entrega inicial +</span>
+            <span class="text-3xl font-bold text-brand-text">USD {plan.mensual}</span>
+            <span class="text-brand-muted text-sm ml-1">/mes</span>
+          </div>
           <ul class="space-y-2 flex-1 mb-6">
             {plan.features.map(f => (
               <li class="flex items-start gap-2 text-brand-muted text-sm">
@@ -225,10 +210,13 @@ const planesGastronomia = [
               </li>
             ))}
           </ul>
-
           <a
-            href="#contacto"
-            class={`w-full py-2.5 rounded-md text-sm font-semibold text-center transition-colors duration-200 ${plan.destacado ? 'bg-brand-blue text-white hover:bg-blue-500' : 'border border-brand-border text-brand-text hover:border-brand-blue'}`}
+            href="#"
+            data-plan={plan.nombre}
+            data-precio-unico={plan.precio}
+            data-precio-mensual={plan.mensual}
+            data-entrega={plan.entregaMensual}
+            class={`wa-plan-btn w-full py-2.5 rounded-md text-sm font-semibold text-center transition-colors duration-200 ${plan.destacado ? 'bg-brand-blue text-white hover:bg-blue-500' : 'border border-brand-border text-brand-text hover:border-brand-blue'}`}
           >
             Consultar
           </a>
@@ -236,7 +224,6 @@ const planesGastronomia = [
       ))}
     </div>
 
-    <!-- Nota -->
     <p class="text-center text-brand-muted text-xs max-w-xl mx-auto">
       Precios por licencia instalada en un puesto de trabajo (PC/Notebook).
       Instalación, configuración y capacitación sin cargo en Córdoba Capital.
@@ -247,12 +234,16 @@ const planesGastronomia = [
 </section>
 
 <script>
+  const WA = "5493512548711";
+  let modalidadActual: 'unica' | 'mensual' = 'unica';
+
   const btnUnica = document.getElementById('btn-unica');
   const btnMensual = document.getElementById('btn-mensual');
   const preciosUnicos = document.querySelectorAll('.precio-unico');
   const preciosMensuales = document.querySelectorAll('.precio-mensual');
 
   function setModalidad(modo: 'unica' | 'mensual') {
+    modalidadActual = modo;
     if (modo === 'unica') {
       preciosUnicos.forEach(el => el.classList.remove('hidden'));
       preciosMensuales.forEach(el => el.classList.add('hidden'));
@@ -272,4 +263,25 @@ const planesGastronomia = [
 
   btnUnica?.addEventListener('click', () => setModalidad('unica'));
   btnMensual?.addEventListener('click', () => setModalidad('mensual'));
+
+  // Botones Consultar — mensaje dinámico según modalidad activa
+  document.querySelectorAll('.wa-plan-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const el = e.currentTarget as HTMLElement;
+      const nombre = el.dataset.plan ?? '';
+      const precioUnico = el.dataset.precioUnico ?? '';
+      const precioMensual = el.dataset.precioMensual ?? '';
+      const entrega = el.dataset.entrega ?? '';
+
+      let msg = '';
+      if (modalidadActual === 'unica') {
+        msg = `Hola! 👋 Vengo de la web de Lugic Systems. Me interesa el plan *${nombre}* (USD ${precioUnico} pago único). ¿Me pueden dar más info?`;
+      } else {
+        msg = `Hola! 👋 Vengo de la web de Lugic Systems. Me interesa el plan *${nombre}* en modalidad mensual (USD ${entrega} entrega + USD ${precioMensual}/mes). ¿Me pueden dar más info?`;
+      }
+
+      window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+  });
 </script>

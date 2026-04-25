@@ -114,12 +114,23 @@ const planesGastronomia = [
       </p>
     </div>
 
+    <!-- Toggle pill animado -->
     <div class="flex justify-center mb-12">
-      <div class="flex bg-brand-mid border border-brand-border rounded-lg p-1 gap-1">
-        <button id="btn-unica" class="modalidad-btn px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200 bg-brand-blue text-white">
+      <div class="relative flex bg-brand-mid border border-brand-border rounded-lg p-1 gap-1">
+        <div
+          id="toggle-pill"
+          class="absolute top-1 left-1 h-[calc(100%-8px)] w-[calc(50%-4px)] bg-brand-blue rounded-md transition-transform duration-300 ease-in-out"
+        ></div>
+        <button
+          id="btn-unica"
+          class="relative z-10 px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200 text-white"
+        >
           Pago único
         </button>
-        <button id="btn-mensual" class="modalidad-btn px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200 text-brand-muted hover:text-brand-text">
+        <button
+          id="btn-mensual"
+          class="relative z-10 px-5 py-2 rounded-md text-sm font-medium transition-colors duration-200 text-brand-muted hover:text-white"
+        >
           Mensual
         </button>
       </div>
@@ -239,6 +250,7 @@ const planesGastronomia = [
 
   const btnUnica = document.getElementById('btn-unica');
   const btnMensual = document.getElementById('btn-mensual');
+  const pill = document.getElementById('toggle-pill');
   const preciosUnicos = document.querySelectorAll('.precio-unico');
   const preciosMensuales = document.querySelectorAll('.precio-mensual');
 
@@ -247,24 +259,25 @@ const planesGastronomia = [
     if (modo === 'unica') {
       preciosUnicos.forEach(el => el.classList.remove('hidden'));
       preciosMensuales.forEach(el => el.classList.add('hidden'));
-      btnUnica?.classList.add('bg-brand-blue', 'text-white');
+      pill?.style.setProperty('transform', 'translateX(0)');
+      btnUnica?.classList.add('text-white');
       btnUnica?.classList.remove('text-brand-muted');
-      btnMensual?.classList.remove('bg-brand-blue', 'text-white');
       btnMensual?.classList.add('text-brand-muted');
+      btnMensual?.classList.remove('text-white');
     } else {
       preciosUnicos.forEach(el => el.classList.add('hidden'));
       preciosMensuales.forEach(el => el.classList.remove('hidden'));
-      btnMensual?.classList.add('bg-brand-blue', 'text-white');
+      pill?.style.setProperty('transform', 'translateX(100%)');
+      btnMensual?.classList.add('text-white');
       btnMensual?.classList.remove('text-brand-muted');
-      btnUnica?.classList.remove('bg-brand-blue', 'text-white');
       btnUnica?.classList.add('text-brand-muted');
+      btnUnica?.classList.remove('text-white');
     }
   }
 
   btnUnica?.addEventListener('click', () => setModalidad('unica'));
   btnMensual?.addEventListener('click', () => setModalidad('mensual'));
 
-  // Botones Consultar — mensaje dinámico según modalidad activa
   document.querySelectorAll('.wa-plan-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();

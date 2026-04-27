@@ -1,61 +1,155 @@
 ---
-// Sección: Demo
-const videoPresentacion = 'https://www.youtube.com/embed/YUrYPRhclqQ?start=7';
-const videoTutorial = 'https://www.youtube.com/watch?v=Qu-5ZnB_K7s';
+const VIDEO_PLACEHOLDER = "https://www.youtube.com/watch?v=YUrYPRhclqQ";
+const EMBED_PLACEHOLDER = "https://www.youtube.com/embed/YUrYPRhclqQ?start=7";
+
+const categorias = [
+  {
+    nombre: "Ventas y caja",
+    color: "#10B981",
+    icono: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>`,
+    demos: [
+      { titulo: "Proceso de venta y cobro", duracion: "~5 min", url: VIDEO_PLACEHOLDER },
+      { titulo: "Caja diaria y cierre de turno", duracion: "~4 min", url: VIDEO_PLACEHOLDER },
+      { titulo: "Facturación electrónica ARCA", duracion: "~5 min", url: VIDEO_PLACEHOLDER },
+      { titulo: "Configuración de Medios de Pago", duracion: "~4 min", url: VIDEO_PLACEHOLDER },
+      { titulo: "Presupuestos", duracion: "~4 min", url: VIDEO_PLACEHOLDER },
+    ],
+  },
+  {
+    nombre: "Stock",
+    color: "#F59E0B",
+    icono: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg>`,
+    demos: [
+      { titulo: "Inventarios", duracion: "~5 min", url: VIDEO_PLACEHOLDER },
+      { titulo: "Ingresos de Mercadería", duracion: "~4 min", url: VIDEO_PLACEHOLDER },
+      { titulo: "Egresos de Mercadería", duracion: "~4 min", url: VIDEO_PLACEHOLDER },
+    ],
+  },
+  {
+    nombre: "Clientes y Proveedores",
+    color: "#06B6D4",
+    icono: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>`,
+    demos: [
+      { titulo: "Carga de Clientes", duracion: "~4 min", url: VIDEO_PLACEHOLDER },
+      { titulo: "Cuentas Corrientes de Clientes y Proveedores", duracion: "~6 min", url: VIDEO_PLACEHOLDER },
+    ],
+  },
+  {
+    nombre: "Administración",
+    color: "#8B5CF6",
+    icono: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`,
+    demos: [
+      { titulo: "Alta de productos y precios", duracion: "~5 min", url: VIDEO_PLACEHOLDER },
+      { titulo: "Cambio masivo de precios", duracion: "~4 min", url: VIDEO_PLACEHOLDER },
+      { titulo: "Promociones y combos", duracion: "~4 min", url: VIDEO_PLACEHOLDER },
+      { titulo: "Reportes e informes", duracion: "~5 min", url: VIDEO_PLACEHOLDER },
+      { titulo: "Creación de Operadores (Usuarios)", duracion: "~3 min", url: VIDEO_PLACEHOLDER },
+      { titulo: "Emisión de Etiquetas de Código de Barra", duracion: "~4 min", url: VIDEO_PLACEHOLDER },
+    ],
+  },
+  {
+    nombre: "Gastronomía",
+    color: "#EF4444",
+    icono: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" /></svg>`,
+    demos: [
+      { titulo: "Gestión de mesas y mozos", duracion: "~6 min", url: VIDEO_PLACEHOLDER },
+    ],
+  },
+];
 ---
 
 <section id="demo" class="py-24 bg-brand-dark">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <!-- Encabezado -->
-    <div class="text-center mb-12">
-      <span class="text-brand-blue text-sm font-semibold uppercase tracking-widest">
-        Demo
-      </span>
+    <div class="text-center mb-16">
+      <span class="text-brand-blue text-sm font-semibold uppercase tracking-widest">Demo</span>
       <h2 class="mt-3 text-3xl sm:text-4xl font-bold text-brand-text">
-        Miralo en acción
+        Velo en acción,<br />
+        <span class="text-brand-blue">antes de decidir</span>
       </h2>
       <p class="mt-4 text-brand-muted text-lg max-w-2xl mx-auto">
-        En 6 minutos vas a ver todo lo que SFC Legacy puede hacer por tu negocio.
-        Sin tecnicismos, directo al grano.
+        Demos cortas y específicas para que puedas ver exactamente lo que necesitas,
+        sin tener que buscar en un video largo.
       </p>
     </div>
 
-    <!-- Video embed -->
-    <div class="max-w-4xl mx-auto">
-      <div class="relative rounded-xl overflow-hidden border border-brand-border shadow-2xl"
-           style="padding-top: 56.25%;">
-        <iframe
-          src={videoPresentacion}
-          title="SFC Legacy — Presentación del sistema"
-          class="absolute inset-0 w-full h-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        />
-      </div>
-
-      <!-- Links secundarios -->
-      <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p class="text-brand-muted text-sm">
-          ¿Querés profundizar más?
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a
-            href={videoTutorial}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="px-6 py-3 rounded-md border border-brand-border text-brand-text font-semibold text-sm hover:border-brand-blue transition-colors duration-200 text-center"
-          >
-            Ver tutorial completo (40 min) →
-          </a>
-          <a
-            href="#contacto"
-            class="px-6 py-3 rounded-md bg-brand-blue text-white font-semibold text-sm hover:bg-blue-500 transition-colors duration-200 text-center"
-          >
-            Quiero una demo personalizada
-          </a>
+    <!-- Demo general destacada -->
+    <div class="mb-16">
+      <p class="text-center text-brand-muted text-sm uppercase tracking-widest mb-6">Demo general</p>
+      <div class="max-w-3xl mx-auto">
+        <div class="relative rounded-xl overflow-hidden bg-brand-mid border border-brand-border" style="padding-top: 56.25%;">
+          <iframe
+            class="absolute inset-0 w-full h-full"
+            src={EMBED_PLACEHOLDER}
+            title="Demo general SFC Legacy — Lugic Systems"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </div>
+        <p class="text-center text-brand-muted text-sm mt-3">
+          Recorrido completo del sistema · ~6 minutos
+        </p>
       </div>
+    </div>
+
+    <!-- Demos por categoría -->
+    <div class="mb-12">
+      <p class="text-center text-brand-muted text-sm uppercase tracking-widest mb-10">Demos específicas por tema</p>
+      <div class="space-y-10">
+        {categorias.map(cat => (
+          <div>
+            <div class="flex items-center gap-2 mb-4">
+              <span style={`color: ${cat.color}`} set:html={cat.icono} />
+              <h3 class="text-brand-text font-semibold text-lg">{cat.nombre}</h3>
+              <div class="flex-1 h-px bg-brand-border ml-2"></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {cat.demos.map(demo => (
+                <a
+                  href={demo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group relative flex items-center gap-3 bg-brand-mid border-l-4 border border-brand-border hover:brightness-110 rounded-xl p-4 transition-all duration-200 overflow-hidden"
+                  style={`border-left-color: ${cat.color}`}
+                >
+                  <!-- Badge duración -->
+                  <span
+                    class="absolute top-2 right-2 text-white text-xs font-semibold px-2 py-0.5 rounded-full"
+                    style={`background-color: ${cat.color}33; color: ${cat.color}`}
+                  >
+                    ▶ {demo.duracion}
+                  </span>
+                  <!-- Ícono play -->
+                  <div
+                    class="shrink-0 w-9 h-9 rounded-full flex items-center justify-center"
+                    style={`background-color: ${cat.color}22`}
+                  >
+                    <svg class="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24" style={`color: ${cat.color}`}>
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                  <!-- Texto -->
+                  <div class="min-w-0 pr-16">
+                    <p class="text-brand-text text-sm font-medium leading-snug">{demo.titulo}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center pt-8 border-t border-brand-border">
+      <p class="text-brand-muted mb-4">¿Preferís que te hagamos una demo en vivo, adaptada a tu negocio?</p>
+      <a
+        href="#contacto"
+        class="inline-block bg-brand-blue hover:bg-blue-600 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+      >
+        Quiero una demo personalizada
+      </a>
     </div>
 
   </div>

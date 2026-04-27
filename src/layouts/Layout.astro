@@ -2,9 +2,19 @@
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  canonicalURL?: string;
 }
 
-const { title, description = 'Software a medida para PYMEs argentinas' } = Astro.props;
+const {
+  title,
+  description = 'Software y tecnología para negocios inteligentes. SFC Legacy: gestión comercial, facturación ARCA, stock, cuentas corrientes y más. Córdoba, Argentina.',
+  ogImage = '/images/og-image.png',
+  canonicalURL = Astro.url.href,
+} = Astro.props;
+
+const siteURL = 'https://www.lugicsystems.com.ar';
+const ogImageAbsolute = `${siteURL}${ogImage}`;
 ---
 
 <!doctype html>
@@ -12,8 +22,37 @@ const { title, description = 'Software a medida para PYMEs argentinas' } = Astro
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+
+    <!-- SEO básico -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Lugic Systems" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Lugic Systems" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageAbsolute} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Lugic Systems — Software y Tecnología para Negocios Inteligentes" />
+    <meta property="og:locale" content="es_AR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbsolute} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />

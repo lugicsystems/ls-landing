@@ -1,37 +1,43 @@
 ---
-const VIDEO_PLACEHOLDER = "https://www.youtube.com/watch?v=YUrYPRhclqQ";
-const EMBED_PLACEHOLDER = "https://www.youtube.com/embed/YUrYPRhclqQ?start=7";
+// Helpers para embed y thumbnail
+function toEmbed(url: string) {
+  const match = url.match(/(?:v=|youtu\.be\/)([^&?/]+)/);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : url;
+}
+function toThumb(url: string) {
+  const match = url.match(/(?:v=|youtu\.be\/)([^&?/]+)/);
+  return match ? `https://img.youtube.com/vi/${match[1]}/mqdefault.jpg` : '';
+}
 
-// Cuando tengas los links reales, reemplazá cada URL acá:
 const VIDEOS = {
-  intro:         VIDEO_PLACEHOLDER,
-  general:       EMBED_PLACEHOLDER,
-  cierre:        VIDEO_PLACEHOLDER,
+  intro:             "https://youtu.be/2rZe1mtmpGo",
+  general:           "https://www.youtube.com/embed/eY8eZqHRxtE",
+  cierre:            "https://youtu.be/MiEgPwpWwYg",
   // Ventas y caja
-  venta:         VIDEO_PLACEHOLDER,
-  caja:          VIDEO_PLACEHOLDER,
-  facturacion:   VIDEO_PLACEHOLDER,
-  mediosPago:    VIDEO_PLACEHOLDER,
-  presupuestos:  VIDEO_PLACEHOLDER,
+  venta:             "https://youtu.be/HGTBz3TXZEs",
+  caja:              "https://youtu.be/UOigd_n2BP8",
+  facturacion:       "https://youtu.be/nlKFt4_XlxQ",
+  mediosPago:        "https://youtu.be/BGezBytHyVQ",
+  presupuestos:      "https://youtu.be/zkPx70jepqQ",
   // Stock
-  inventarios:   VIDEO_PLACEHOLDER,
-  ingresos:      VIDEO_PLACEHOLDER,
-  egresos:       VIDEO_PLACEHOLDER,
+  inventarios:       "https://youtu.be/XevWrNg7wqI",
+  ingresos:          "https://youtu.be/zYWvcLHPaNk",
+  egresos:           "https://youtu.be/QHlXqJAgMGw",
   // Clientes y Proveedores
-  cargaClientes: VIDEO_PLACEHOLDER,
-  ctaClientes:   VIDEO_PLACEHOLDER,
-  ctaProveedores:VIDEO_PLACEHOLDER,
+  cargaClientes:     "https://youtu.be/gZ_NsCMjvLc",
+  ctaClientes:       "https://youtu.be/5IbaWeNXTCg",
+  ctaProveedores:    "https://youtu.be/2ZU5AzFyFNI",
   // Administración
-  altaProductos: VIDEO_PLACEHOLDER,
-  imagenesProductos: VIDEO_PLACEHOLDER,
-  cambioPrecios: VIDEO_PLACEHOLDER,
-  promociones:   VIDEO_PLACEHOLDER,
-  reportes:      VIDEO_PLACEHOLDER,
-  operadores:    VIDEO_PLACEHOLDER,
-  etiquetasCB:   VIDEO_PLACEHOLDER,
-  etiquetasGond: VIDEO_PLACEHOLDER,
+  altaProductos:     "https://youtu.be/TttPZAbeWd4",
+  imagenesProductos: "https://youtu.be/0Knj9B5QdgQ",
+  cambioPrecios:     "https://youtu.be/nPsPG1DRMic",
+  promociones:       "https://youtu.be/ZNWbE4-vweE",
+  reportes:          "https://youtu.be/BHQD6X2pd_A",
+  operadores:        "https://youtu.be/VKH2FuCwU7c",
+  etiquetasCB:       "https://youtu.be/tBAbq62L4Ek",
+  etiquetasGond:     "https://youtu.be/nsG1DKjlYJo",
   // Gastronomía
-  mesas:         VIDEO_PLACEHOLDER,
+  mesas:             "https://youtu.be/IgPl769yJPw",
 };
 
 const categorias = [
@@ -40,11 +46,11 @@ const categorias = [
     color: "#10B981",
     icono: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>`,
     demos: [
-      { titulo: "Proceso de venta y cobro",                  duracion: "~5 min", url: VIDEOS.venta },
-      { titulo: "Caja diaria e Ingresos y egresos de dinero", duracion: "~4 min", url: VIDEOS.caja },
-      { titulo: "Facturación electrónica ARCA",              duracion: "~5 min", url: VIDEOS.facturacion },
-      { titulo: "Configuración de Medios de Pago",           duracion: "~4 min", url: VIDEOS.mediosPago },
-      { titulo: "Presupuestos",                              duracion: "~4 min", url: VIDEOS.presupuestos },
+      { titulo: "Proceso de venta y cobro",                   duracion: "~4 min", url: VIDEOS.venta },
+      { titulo: "Caja diaria e Ingresos y egresos de dinero", duracion: "~3 min", url: VIDEOS.caja },
+      { titulo: "Facturación electrónica ARCA",               duracion: "~3 min", url: VIDEOS.facturacion },
+      { titulo: "Configuración de Medios de Pago",            duracion: "~4 min", url: VIDEOS.mediosPago },
+      { titulo: "Presupuestos",                               duracion: "~4 min", url: VIDEOS.presupuestos },
     ],
   },
   {
@@ -52,9 +58,9 @@ const categorias = [
     color: "#F59E0B",
     icono: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg>`,
     demos: [
-      { titulo: "Inventarios",           duracion: "~5 min", url: VIDEOS.inventarios },
-      { titulo: "Ingresos de Mercadería", duracion: "~4 min", url: VIDEOS.ingresos },
-      { titulo: "Egresos de Mercadería",  duracion: "~4 min", url: VIDEOS.egresos },
+      { titulo: "Inventarios",            duracion: "~4 min", url: VIDEOS.inventarios },
+      { titulo: "Ingresos de Mercadería", duracion: "~2 min", url: VIDEOS.ingresos },
+      { titulo: "Egresos de Mercadería",  duracion: "~2 min", url: VIDEOS.egresos },
     ],
   },
   {
@@ -62,8 +68,8 @@ const categorias = [
     color: "#06B6D4",
     icono: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>`,
     demos: [
-      { titulo: "Carga de Clientes y Proveedores",   duracion: "~4 min", url: VIDEOS.cargaClientes },
-      { titulo: "Cuentas Corrientes de Clientes",    duracion: "~5 min", url: VIDEOS.ctaClientes },
+      { titulo: "Alta de Clientes y Proveedores",    duracion: "~2 min", url: VIDEOS.cargaClientes },
+      { titulo: "Cuentas Corrientes de Clientes",    duracion: "~14 min", url: VIDEOS.ctaClientes },
       { titulo: "Cuentas Corrientes de Proveedores", duracion: "~5 min", url: VIDEOS.ctaProveedores },
     ],
   },
@@ -72,14 +78,14 @@ const categorias = [
     color: "#8B5CF6",
     icono: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`,
     demos: [
-      { titulo: "Alta de productos y precios",              duracion: "~5 min", url: VIDEOS.altaProductos },
-      { titulo: "Imágenes de productos en el sistema", duracion: "~3 min", url: VIDEOS.imagenesProductos },
-      { titulo: "Cambio masivo de precios",                 duracion: "~4 min", url: VIDEOS.cambioPrecios },
-      { titulo: "Promociones y combos",                    duracion: "~4 min", url: VIDEOS.promociones },
-      { titulo: "Reportes e informes",                     duracion: "~5 min", url: VIDEOS.reportes },
-      { titulo: "Creación de Operadores (Usuarios)",       duracion: "~3 min", url: VIDEOS.operadores },
+      { titulo: "Alta de productos y precios",             duracion: "~6 min", url: VIDEOS.altaProductos },
+      { titulo: "Imágenes de productos en el sistema",     duracion: "~3 min", url: VIDEOS.imagenesProductos },
+      { titulo: "Cambio masivo de precios",                duracion: "~2 min", url: VIDEOS.cambioPrecios },
+      { titulo: "Promociones y combos",                   duracion: "~9 min", url: VIDEOS.promociones },
+      { titulo: "Informes y Listados",                    duracion: "~5 min", url: VIDEOS.reportes },
+      { titulo: "Administración de Operadores (Usuarios)", duracion: "~3 min", url: VIDEOS.operadores },
       { titulo: "Emisión de Etiquetas de Código de Barra", duracion: "~4 min", url: VIDEOS.etiquetasCB },
-      { titulo: "Emisión de Etiquetas para Góndolas",      duracion: "~4 min", url: VIDEOS.etiquetasGond },
+      { titulo: "Emisión de Etiquetas para Góndolas",     duracion: "~6 min", url: VIDEOS.etiquetasGond },
     ],
   },
   {
@@ -87,16 +93,10 @@ const categorias = [
     color: "#EF4444",
     icono: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" /></svg>`,
     demos: [
-      { titulo: "Gestión de mesas y mozos", duracion: "~6 min", url: VIDEOS.mesas },
+      { titulo: "Gestión de mesas y mozos", duracion: "~4 min", url: VIDEOS.mesas },
     ],
   },
 ];
-
-// Helpers para embed
-function toEmbed(url: string) {
-  const match = url.match(/(?:v=|youtu\.be\/)([^&?/]+)/);
-  return match ? `https://www.youtube.com/embed/${match[1]}` : url;
-}
 ---
 
 <section id="demo" class="py-24 bg-brand-dark">
@@ -134,7 +134,7 @@ function toEmbed(url: string) {
       </div>
     </div>
 
-    <!-- Demo general destacada -->
+    <!-- Demo general -->
     <div class="mb-16">
       <p class="text-center text-brand-muted text-sm uppercase tracking-widest mb-6">Demo general</p>
       <div class="max-w-3xl mx-auto">
@@ -149,7 +149,7 @@ function toEmbed(url: string) {
           ></iframe>
         </div>
         <p class="text-center text-brand-muted text-sm mt-3">
-          Recorrido completo del sistema · ~6 minutos
+          Recorrido completo del sistema · ~3 minutos
         </p>
       </div>
     </div>
@@ -171,24 +171,40 @@ function toEmbed(url: string) {
                   href={demo.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group relative flex items-center gap-3 bg-brand-mid border-l-4 border border-brand-border hover:brightness-110 rounded-xl p-4 transition-all duration-200 overflow-hidden"
-                  style={`border-left-color: ${cat.color}`}
+                  class="demo-card flex flex-col overflow-hidden rounded-xl border border-brand-border"
+                  style={`border-left: 4px solid ${cat.color}`}
                 >
-                  <span
-                    class="absolute top-2 right-2 text-white text-xs font-semibold px-2 py-0.5 rounded-full"
-                    style={`background-color: ${cat.color}33; color: ${cat.color}`}
-                  >
-                    ▶ {demo.duracion}
-                  </span>
-                  <div
-                    class="shrink-0 w-9 h-9 rounded-full flex items-center justify-center"
-                    style={`background-color: ${cat.color}22`}
-                  >
-                    <svg class="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24" style={`color: ${cat.color}`}>
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
+                  <!-- Thumbnail -->
+                  <div class="relative overflow-hidden" style="padding-top: 56.25%;">
+                    <img
+                      src={toThumb(demo.url)}
+                      alt={demo.titulo}
+                      class="demo-thumb absolute inset-0 w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <!-- Overlay oscuro -->
+                    <div class="demo-overlay absolute inset-0" style="background: rgba(0,0,0,0.50);"></div>
+                    <!-- Botón play -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <div
+                        class="demo-play w-12 h-12 rounded-full flex items-center justify-center"
+                        style={`background-color: ${cat.color}cc`}
+                      >
+                        <svg class="w-5 h-5 ml-0.5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <!-- Badge duración -->
+                    <span
+                      class="absolute bottom-2 right-2 text-xs font-semibold px-2 py-0.5 rounded-full text-white"
+                      style={`background-color: ${cat.color}dd`}
+                    >
+                      ▶ {demo.duracion}
+                    </span>
                   </div>
-                  <div class="min-w-0 pr-16">
+                  <!-- Título -->
+                  <div class="bg-brand-mid px-3 py-2.5">
                     <p class="text-brand-text text-sm font-medium leading-snug">{demo.titulo}</p>
                   </div>
                 </a>
@@ -232,3 +248,30 @@ function toEmbed(url: string) {
 
   </div>
 </section>
+
+<style>
+  .demo-card {
+    transition: border-color 0.2s;
+  }
+  .demo-card:hover {
+    filter: brightness(1.08);
+  }
+  .demo-thumb {
+    transition: transform 0.35s ease;
+  }
+  .demo-card:hover .demo-thumb {
+    transform: scale(1.06);
+  }
+  .demo-overlay {
+    transition: background 0.2s ease;
+  }
+  .demo-card:hover .demo-overlay {
+    background: rgba(0,0,0,0.25) !important;
+  }
+  .demo-play {
+    transition: transform 0.2s ease;
+  }
+  .demo-card:hover .demo-play {
+    transform: scale(1.15);
+  }
+</style>

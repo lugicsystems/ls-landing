@@ -56,6 +56,45 @@ const ogImageAbsolute = `${siteURL}${ogImage}`;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["LocalBusiness", "ProfessionalService"],
+      "name": "Lugic Systems",
+      "description": "Software y tecnología para negocios inteligentes. Desarrollo de software de gestión comercial, equipamiento, redes, cámaras de seguridad y energía solar.",
+      "url": "https://www.lugicsystems.com.ar",
+      "logo": "https://www.lugicsystems.com.ar/images/logo.png",
+      "image": "https://www.lugicsystems.com.ar/images/og-image.png",
+      "telephone": "+5493512548711",
+      "email": "info@lugicsystems.com.ar",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Córdoba",
+        "addressRegion": "Córdoba",
+        "addressCountry": "AR"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Argentina"
+      },
+      "sameAs": [
+        "https://instagram.com/lugicsystems",
+        "https://wa.me/5493512548711"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios Lugic Systems",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Software de Gestión Comercial" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Equipamiento Comercial" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Redes de Datos" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cámaras de Seguridad" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Energía Solar" } }
+        ]
+      }
+    }
+    </script>
   </head>
   <body class="bg-brand-dark text-brand-text antialiased">
     <slot />

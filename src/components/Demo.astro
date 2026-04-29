@@ -118,15 +118,26 @@ const categorias = [
     <div class="mb-12">
       <p class="text-center text-brand-muted text-sm uppercase tracking-widest mb-6">Antes de empezar</p>
       <div class="max-w-3xl mx-auto">
-        <div class="relative rounded-xl overflow-hidden bg-brand-mid border border-brand-border" style="padding-top: 56.25%;">
-          <iframe
-            class="absolute inset-0 w-full h-full"
-            src={toEmbed(VIDEOS.intro)}
-            title="Introducción — SFC Legacy"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+        <div
+          class="lite-embed relative rounded-xl overflow-hidden bg-brand-mid border border-brand-border cursor-pointer"
+          style="padding-top: 56.25%;"
+          data-embed={toEmbed(VIDEOS.intro)}
+          data-title="Introducción — SFC Legacy"
+          onclick="activarEmbed(this)"
+        >
+          <img
+            src={toThumb(VIDEOS.intro)}
+            alt="Introducción — SFC Legacy"
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 flex items-center justify-center" style="background: rgba(0,0,0,0.40);">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: rgba(45,107,228,0.85);">
+              <svg class="w-7 h-7 ml-1 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
         </div>
         <p class="text-center text-brand-muted text-sm mt-3">
           Una presentación rápida antes de entrar al sistema
@@ -138,15 +149,26 @@ const categorias = [
     <div class="mb-16">
       <p class="text-center text-brand-muted text-sm uppercase tracking-widest mb-6">Demo general</p>
       <div class="max-w-3xl mx-auto">
-        <div class="relative rounded-xl overflow-hidden bg-brand-mid border border-brand-border" style="padding-top: 56.25%;">
-          <iframe
-            class="absolute inset-0 w-full h-full"
-            src={VIDEOS.general}
-            title="Demo general SFC Legacy — Lugic Systems"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+        <div
+          class="lite-embed relative rounded-xl overflow-hidden bg-brand-mid border border-brand-border cursor-pointer"
+          style="padding-top: 56.25%;"
+          data-embed={toEmbed(VIDEOS.general)}
+          data-title="Demo general SFC Legacy — Lugic Systems"
+          onclick="activarEmbed(this)"
+        >
+          <img
+            src={toThumb(VIDEOS.general)}
+            alt="Demo general SFC Legacy — Lugic Systems"
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 flex items-center justify-center" style="background: rgba(0,0,0,0.40);">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: rgba(45,107,228,0.85);">
+              <svg class="w-7 h-7 ml-1 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
         </div>
         <p class="text-center text-brand-muted text-sm mt-3">
           Recorrido completo del sistema · ~3 minutos
@@ -220,15 +242,26 @@ const categorias = [
     <div class="mb-16">
       <p class="text-center text-brand-muted text-sm uppercase tracking-widest mb-6">¿Qué sigue?</p>
       <div class="max-w-3xl mx-auto">
-        <div class="relative rounded-xl overflow-hidden bg-brand-mid border border-brand-border" style="padding-top: 56.25%;">
-          <iframe
-            class="absolute inset-0 w-full h-full"
-            src={toEmbed(VIDEOS.cierre)}
-            title="Cierre — SFC Legacy"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+        <div
+          class="lite-embed relative rounded-xl overflow-hidden bg-brand-mid border border-brand-border cursor-pointer"
+          style="padding-top: 56.25%;"
+          data-embed={toEmbed(VIDEOS.cierre)}
+          data-title="Cierre — SFC Legacy"
+          onclick="activarEmbed(this)"
+        >
+          <img
+            src={toThumb(VIDEOS.cierre)}
+            alt="Cierre — SFC Legacy"
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 flex items-center justify-center" style="background: rgba(0,0,0,0.40);">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center" style="background: rgba(45,107,228,0.85);">
+              <svg class="w-7 h-7 ml-1 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </div>
         </div>
         <p class="text-center text-brand-muted text-sm mt-3">
           Ya viste el sistema — esto es lo que podés hacer ahora
@@ -306,6 +339,23 @@ const categorias = [
 
   (window as any).abrirDemo = abrirDemo;
   (window as any).cerrarDemo = cerrarDemo;
+
+  function activarEmbed(div: HTMLElement) {
+    const embed = div.getAttribute('data-embed') || '';
+    const title = div.getAttribute('data-title') || '';
+    const iframe = document.createElement('iframe');
+    iframe.src = embed + '?autoplay=1&rel=0';
+    iframe.title = title;
+    iframe.className = 'absolute inset-0 w-full h-full';
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    iframe.setAttribute('allowfullscreen', '');
+    div.innerHTML = '';
+    div.appendChild(iframe);
+    div.onclick = null;
+    div.style.cursor = 'default';
+  }
+  (window as any).activarEmbed = activarEmbed;
 </script>
 
 <style>
@@ -391,5 +441,12 @@ const categorias = [
     position: relative;
     padding-top: 56.25%;
     background: #000;
+  }
+
+  .lite-embed:hover > div {
+    background: rgba(0,0,0,0.25) !important;
+  }
+  .lite-embed:hover svg {
+    transform: scale(1.1);
   }
 </style>

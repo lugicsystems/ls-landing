@@ -26,10 +26,7 @@ const navLinks = [
       <!-- Nav desktop -->
       <nav class="hidden md:flex items-center gap-6">
         {navLinks.map(link => (
-          <a
-            href={link.href}
-            class="text-sm text-brand-muted hover:text-brand-text whitespace-nowrap transition-colors duration-200"
-          >
+          <a href={link.href} class="nav-link whitespace-nowrap">
             {link.label}
           </a>
         ))}
@@ -60,12 +57,9 @@ const navLinks = [
 
   <!-- Nav mobile -->
   <div id="mobile-menu" class="hidden md:hidden border-t border-brand-border">
-    <div class="px-4 py-3 flex flex-col gap-3">
+    <div class="px-4 py-3 flex flex-col gap-1">
       {navLinks.map(link => (
-        <a
-          href={link.href}
-          class="text-sm text-brand-muted hover:text-brand-text transition-colors duration-200"
-        >
+        <a href={link.href} class="nav-link-mobile">
           {link.label}
         </a>
       ))}
@@ -86,3 +80,49 @@ const navLinks = [
     menu?.classList.toggle('hidden');
   });
 </script>
+
+<style>
+  /* Nav desktop — subrayado animado desde el centro */
+  .nav-link {
+    position: relative;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #9CA3AF;
+    text-decoration: none;
+    padding-bottom: 3px;
+    transition: color 0.2s ease;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    right: 50%;
+    height: 1.5px;
+    background: #2D6BE4;
+    transition: left 0.25s ease, right 0.25s ease;
+  }
+  .nav-link:hover {
+    color: #F9FAFB;
+  }
+  .nav-link:hover::after {
+    left: 0;
+    right: 0;
+  }
+
+  /* Nav mobile — highlight con fondo sutil */
+  .nav-link-mobile {
+    display: block;
+    font-size: 0.875rem;
+    color: #9CA3AF;
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 6px;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+  .nav-link-mobile:hover,
+  .nav-link-mobile:active {
+    color: #F9FAFB;
+    background: rgba(45, 107, 228, 0.1);
+  }
+</style>

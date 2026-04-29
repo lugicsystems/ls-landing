@@ -136,8 +136,10 @@ const INSTAGRAM  = "https://instagram.com/lugicsystems";
     if (nombre) {
       const msg = `Hola! 👋 Soy ${nombre}. Vengo de la Web de *Lugic Systems* 🌐... Tengo un negocio y necesito más info sobre el Software, Equipamiento y Servicios que ofrecen! 🤝`;
       const url = `https://wa.me/5493512548711?text=${encodeURIComponent(msg)}`;
+      if (typeof fbq !== 'undefined') fbq('track', 'Contact');
       window.open(url, '_blank', 'noopener,noreferrer');
     } else {
+      if (typeof fbq !== 'undefined') fbq('track', 'Contact');
       window.open(WA_LINK, '_blank', 'noopener,noreferrer');
     }
   });

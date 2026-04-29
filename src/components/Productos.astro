@@ -3,7 +3,7 @@ const features = [
   'Facturación Electrónica con ARCA',
   'Control Interno de ventas',
   'Gestión de stock e inventario',
-  'Caja y cierre diario por susuarios',
+  'Caja y cierre diario por usuarios',
   'Cuentas corrientes de clientes',
   'Presupuestos y remitos',
   'Cambios de precios masivos',
@@ -28,6 +28,34 @@ const screenshots = [
   { src: '/images/sfc/05-inventario.png', alt: 'Inventario y stock' },
   { src: '/images/sfc/06-cambios-precios.png', alt: 'Cambios de precios masivos' },
   { src: '/images/sfc/07-promociones.png', alt: 'Promociones y combos' },
+];
+
+const equipos = [
+  {
+    nombre: 'Tickeadora térmica',
+    descripcion: 'Impresión de tickets y comprobantes de venta en segundos.',
+    imgs: ['/images/equipos/tickeadora.png'],
+  },
+  {
+    nombre: 'Lector de código de barras',
+    descripcion: 'Lectura instantánea para agilizar ventas y control de stock.',
+    imgs: ['/images/equipos/lector-codigos.png'],
+  },
+  {
+    nombre: 'Balanza digital',
+    descripcion: 'Integración directa con el sistema para venta por peso.',
+    imgs: ['/images/equipos/balanza.png'],
+  },
+  {
+    nombre: 'Impresora de etiquetas',
+    descripcion: 'Emisión de etiquetas con código de barras y precios para góndolas.',
+    imgs: ['/images/equipos/impresora-etiquetas.png'],
+  },
+  {
+    nombre: 'Mini PC',
+    descripcion: 'Equipamiento compacto y potente, ideal para puntos de venta.',
+    imgs: ['/images/equipos/mini-pc.png', '/images/equipos/mini-pc2.png'],
+  },
 ];
 ---
 
@@ -140,10 +168,75 @@ const screenshots = [
       </div>
     </div>
 
+    <!-- Equipamiento compatible -->
+    <div class="border-t border-brand-border pt-16">
+      <div class="text-center mb-10">
+        <span class="text-brand-blue text-sm font-semibold uppercase tracking-widest">Equipamiento</span>
+        <h3 class="mt-3 text-2xl sm:text-3xl font-bold text-brand-text">
+          Funciona con tu equipamiento
+        </h3>
+        <p class="mt-3 text-brand-muted text-base max-w-xl mx-auto">
+          SFC Legacy se integra nativamente con el equipamiento más usado en comercios argentinos.
+          Lo proveemos, instalamos y configuramos nosotros.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
+        {equipos.map((equipo, ei) => (
+          <div class="equipo-card bg-brand-dark rounded-xl border border-brand-border p-4 flex flex-col items-center gap-3 hover:border-brand-blue transition-colors duration-200">
+            <!-- Imagen / mini carrusel -->
+            <div class="equipo-imgs w-full relative" style="height: 120px;">
+              {equipo.imgs.map((img, ii) => (
+                <img
+                  src={img}
+                  alt={equipo.nombre}
+                  class={`equipo-img absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${ii === 0 ? 'opacity-100' : 'opacity-0'}`}
+                  data-equipo={ei}
+                  data-idx={ii}
+                  loading="lazy"
+                />
+              ))}
+              {equipo.imgs.length > 1 && (
+                <div class="absolute bottom-0 left-0 right-0 flex justify-center gap-1.5">
+                  {equipo.imgs.map((_, ii) => (
+                    <button
+                      type="button"
+                      class={`equipo-dot w-1.5 h-1.5 rounded-full transition-colors duration-200 ${ii === 0 ? 'bg-brand-blue' : 'bg-brand-border'}`}
+                      data-equipo={ei}
+                      data-idx={ii}
+                      onclick="equipoGoTo(this)"
+                    ></button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <!-- Nombre y descripción -->
+            <div class="text-center">
+              <p class="text-brand-text text-sm font-semibold leading-tight">{equipo.nombre}</p>
+              <p class="text-brand-muted text-xs mt-1 leading-snug">{equipo.descripcion}</p>
+            </div>
+            <!-- Badge -->
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-blue/10 text-brand-blue border border-brand-blue/20">
+              Compatible
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Badge Windows -->
+      <div class="flex items-center justify-center gap-3">
+        <svg viewBox="0 0 24 24" class="w-5 h-5 shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.799" fill="#00ADEF"/>
+        </svg>
+        <span class="text-brand-muted text-sm">Funciona sobre <span class="text-brand-text font-medium">Windows 10 y 11</span></span>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <script>
+  // Carrusel de screenshots
   const slides = document.querySelectorAll('.carousel-slide');
   const dots = document.querySelectorAll('.dot');
   let current = 0;
@@ -153,9 +246,7 @@ const screenshots = [
     slides[current].classList.remove('block');
     dots[current].classList.remove('bg-brand-blue');
     dots[current].classList.add('bg-brand-border');
-
     current = (index + slides.length) % slides.length;
-
     slides[current].classList.remove('hidden');
     slides[current].classList.add('block');
     dots[current].classList.add('bg-brand-blue');
@@ -167,4 +258,20 @@ const screenshots = [
   dots.forEach(dot => {
     dot.addEventListener('click', () => goTo(Number(dot.getAttribute('data-index'))));
   });
+
+  // Mini carrusel de equipos
+  function equipoGoTo(dotBtn: HTMLElement) {
+    const ei = Number(dotBtn.getAttribute('data-equipo'));
+    const idx = Number(dotBtn.getAttribute('data-idx'));
+
+    document.querySelectorAll<HTMLElement>(`.equipo-img[data-equipo="${ei}"]`).forEach((img, i) => {
+      img.style.opacity = i === idx ? '1' : '0';
+    });
+    document.querySelectorAll<HTMLElement>(`.equipo-dot[data-equipo="${ei}"]`).forEach((d, i) => {
+      d.classList.toggle('bg-brand-blue', i === idx);
+      d.classList.toggle('bg-brand-border', i !== idx);
+    });
+  }
+
+  (window as any).equipoGoTo = equipoGoTo;
 </script>

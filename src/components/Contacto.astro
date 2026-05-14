@@ -14,7 +14,7 @@ const INSTAGRAM  = "https://instagram.com/lugicsystems";
     <div class="text-center mb-14">
       <span class="text-brand-blue text-sm font-semibold uppercase tracking-widest">Contacto</span>
       <h2 class="text-3xl sm:text-4xl font-bold text-brand-text mt-2">
-        ¿Listo para digitalizar tu negocio?
+        ¿Listo para digitalizar tu negocio <span class="text-yellow-400">SIN COMPLICACIONES</span>?
       </h2>
       <p class="text-brand-muted mt-4 max-w-xl mx-auto">
         Contanos cómo se llama tu negocio y te respondemos por WhatsApp. Sin vueltas.
@@ -25,17 +25,33 @@ const INSTAGRAM  = "https://instagram.com/lugicsystems";
 
       <!-- Formulario -->
       <div class="bg-brand-dark border border-brand-border rounded-2xl p-8 flex flex-col gap-6">
-        <div class="flex flex-col gap-2">
-          <label for="contact-name" class="text-brand-text text-sm font-medium">
-            ¿Cómo se llama tu negocio o cómo te llamás?
-          </label>
-          <input
-            id="contact-name"
-            type="text"
-            placeholder="Ej: Despensa El Trébol / Juan"
-            class="bg-brand-mid border border-brand-border rounded-xl px-4 py-3 text-brand-text placeholder-brand-muted focus:outline-none focus:border-brand-blue transition-colors text-sm"
-            maxlength="60"
-          />
+        <div class="flex flex-col gap-4">
+          <ul class="flex flex-col gap-3">
+            <li class="flex items-center gap-3">
+              <span class="text-2xl">❌</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-brand-muted shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/>
+              </svg>    
+              <span class="text-brand-text text-base font-medium">Stock descontrolado</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="text-2xl">❌</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-brand-muted shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+              <span class="text-brand-text text-base font-medium">Ventas sin registro</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <span class="text-2xl">❌</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-brand-muted shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              <span class="text-brand-text text-base font-medium">Facturación manual y lenta</span>
+            </li>
+          </ul>
+          <p class="text-brand-muted text-sm">
+            Si tu negocio tiene alguno de estos problemas, <span class="text-brand-text font-semibold">tenemos la solución.</span>
+          </p>
         </div>
 
         <button
@@ -49,9 +65,6 @@ const INSTAGRAM  = "https://instagram.com/lugicsystems";
           Contactar por WhatsApp
         </button>
 
-        <p class="text-brand-muted text-xs text-center">
-          Te respondemos en minutos · Lunes a Sábado
-        </p>
       </div>
 
       <!-- Canales alternativos -->
@@ -126,27 +139,11 @@ const INSTAGRAM  = "https://instagram.com/lugicsystems";
 
 <script>
   // @ts-nocheck
-  const btn   = document.getElementById('wa-contact-btn')!;
-  const input = document.getElementById('contact-name') as HTMLInputElement;
-
-  const MSG_BASE = "Hola! 👋 Vengo de la Web de *Lugic Systems* 🌐... Tengo un negocio y necesito más info sobre el Software, Equipamiento y Servicios que ofrecen! 🤝";
-  const WA_LINK  = "https://wa.link/tcc76s";
+  const btn    = document.getElementById('wa-contact-btn')!;
+  const WA_LINK = "https://wa.link/tcc76s";
 
   btn.addEventListener('click', () => {
-    const nombre = input.value.trim();
-    if (nombre) {
-      const msg = `Hola! 👋 Soy ${nombre}. Vengo de la Web de *Lugic Systems* 🌐... Tengo un negocio y necesito más info sobre el Software, Equipamiento y Servicios que ofrecen! 🤝`;
-      const url = `https://wa.me/5493512548711?text=${encodeURIComponent(msg)}`;
-      if (typeof fbq !== 'undefined') fbq('track', 'Contact');
-      window.open(url, '_blank', 'noopener,noreferrer');
-    } else {
-      if (typeof fbq !== 'undefined') fbq('track', 'Contact');
-      window.open(WA_LINK, '_blank', 'noopener,noreferrer');
-    }
-  });
-
-  // Enter en el input también dispara
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') btn.click();
+    if (typeof fbq !== 'undefined') fbq('track', 'Contact');
+    window.open(WA_LINK, '_blank', 'noopener,noreferrer');
   });
 </script>

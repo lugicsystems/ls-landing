@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Link — Lugic Systems"
+  description="Link conecta SFC Legacy con aplicaciones móviles. Link Preventa: toma de pedidos y visitas en la calle desde el celular."
+  canonicalURL="https://www.lugicsystems.com.ar/link/"
+>
+  <Header />
+
+  <main>
+    <!-- Hero -->
+    <section class="relative flex flex-col items-center justify-center text-center px-4 pt-36 pb-20 overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[600px] rounded-full"
+          style="background: radial-gradient(ellipse 70% 50% at center, rgba(45,107,228,0.35) 0%, transparent 70%);">
+        </div>
+      </div>
+
+      <div class="relative z-10 flex flex-col items-center gap-6 max-w-2xl mx-auto">
+        <img
+          src="/images/link-isologo.webp"
+          alt="Link"
+          width="400"
+          height="324"
+          class="w-[200px] h-auto"
+          loading="eager"
+        />
+        <h1 class="text-4xl sm:text-5xl font-bold text-brand-text">Link</h1>
+        <p class="text-brand-muted text-lg sm:text-xl max-w-xl">
+          Conecta SFC Legacy con aplicaciones móviles para tu equipo en la calle.
+        </p>
+      </div>
+    </section>
+
+    <!-- Link Preventa -->
+    <section class="py-20 bg-brand-mid">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-brand-text">Link Preventa</h2>
+        <p class="mt-6 text-brand-muted text-lg leading-relaxed">
+          Toma de pedidos y registro de visitas para preventistas, desde el celular.
+          Es una aplicación web instalable (PWA) para iPhone y Android: no requiere tiendas
+          de aplicaciones. Los pedidos se integran con
+          <strong class="text-brand-text">SFC Legacy</strong> de la empresa.
+        </p>
+      </div>
+    </section>
+
+    <!-- Cómo se accede -->
+    <section class="py-20">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-brand-text">Cómo se accede</h2>
+        <p class="mt-6 text-brand-muted text-lg leading-relaxed">
+          Cada preventista ingresa con su cuenta de Google. Solo pueden ingresar los
+          preventistas que su empresa dio de alta en el sistema.
+        </p>
+      </div>
+    </section>
+
+    <!-- Cierre -->
+    <section class="pb-24">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="border-t border-brand-border pt-8 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between text-sm">
+          <a href="/link/privacidad" class="text-brand-blue hover:underline">
+            Política de privacidad de Link
+          </a>
+          <a href="mailto:info@lugicsystems.com.ar" class="text-brand-muted hover:text-brand-text transition-colors">
+            info@lugicsystems.com.ar
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
